@@ -1,0 +1,6 @@
+local MyPlr = game.Players.LocalPlayer
+local MyChar = MyPlr.Character
+local MyHRP = MyChar.HumanoidRootPart
+local HRPC = MyHRP:Clone()
+MyHRP:Destroy()
+HRPC.Parent = MyChar
