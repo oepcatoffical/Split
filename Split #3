@@ -1,0 +1,9 @@
+function EditProperty(Instance, Property, Value)
+local ReadOnly = getrawmetatable(Instance)
+setreadonly(ReadOnly, false)
+S = sethiddenproperty(Instance, Property, Value)
+setreadonly(ReadOnly, true)
+print(tostring(Instance).."."..tostring(Property).." = "..S)
+end
+
+EditProperty(workspace, "RejectCharacterDeletions", "Disabled")
