@@ -1,0 +1,43 @@
+--[[
+getgenv().SplitV4 = true
+getgenv().SplitV4 = false
+]]
+getgenv().SplitV4 = true
+
+if not game:FindFirstChild("Split")then local Split = Instance.new("MeshPart", game)Split.Name = "Split"end
+
+function Split(Part, CFrame)
+if string.find(Part.ClassName, "Part") or Part:IsA("UnionOperation") then
+local inf = math.huge
+local FPDH = workspace.FallenPartsDestroyHeight
+local PartV = Part.Velocity 
+local PartS = Part.Size
+local Joints = Part:GetChildren()
+for i,v in pairs(Joints) do v.Parent = game:FindFirstChild("Split") end
+if workspace.FallenPartsDestroyHeight ~= 50000 then workspace.FallenPartsDestroyHeight = 50000 end
+Part.CFrame = CFrame
+Part.Anchored = true
+Part.Velocity = Vector3.new(inf, inf, inf)
+Part.Size = Vector3.new(100,100,100)
+Part.Transparency = 1
+wait(.01)
+for i,v in pairs(game:FindFirstChild("Split"):GetChildren()) do v.Parent = Part end
+workspace.FallenPartsDestroyHeight = FPDH
+Part.Anchored = false
+Part.Velocity = PartV
+Part.Size = PartS
+Part.Transparency = 0
+end
+end
+
+local CFrameToSplit = CFrame.new(-279,281,1007)
+local a = 0
+repeat
+a = a + 1
+for i, Part in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+if Part.Name ~= "Head" and Part.Name ~= "HumanoidRootPart" then
+Split(Part, CFrameToSplit)
+end
+end
+wait()
+until getgenv().SplitV4 == false
